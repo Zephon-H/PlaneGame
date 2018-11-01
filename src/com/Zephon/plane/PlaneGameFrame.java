@@ -1,11 +1,14 @@
 package com.Zephon.plane;
 
+
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -17,7 +20,7 @@ public class PlaneGameFrame extends MyFrame {
 	Image bg=GameUtil.getImage("images/bg.jpg");
 	Plane plane=new Plane("images/plane.png",50,50);
 	
-	ArrayList bulletList=new ArrayList();//·ºĞÍÔİÊ±²»¼Ó
+	ArrayList bulletList=new ArrayList();//æ³›å‹æš‚æ—¶ä¸åŠ 
 	
 	Explode bao;
 	
@@ -33,8 +36,8 @@ public class PlaneGameFrame extends MyFrame {
 		for(int i=0;i<bulletList.size();i++) {
 			Bullet b=(Bullet) bulletList.get(i);
 			b.draw(g);
-			
-			//¼ì²â¸ú·É»úµÄÅö×²
+
+			//æ£€æµ‹è·Ÿé£æœºçš„ç¢°æ’
 			boolean boom=b.getRect().intersects(plane.getRect());
 			
 			if(boom){
@@ -48,46 +51,46 @@ public class PlaneGameFrame extends MyFrame {
 		if(!plane.isLive()) {
 			bao.draw(g);
 			int period=(int)(endTime.getTime()-startTime.getTime())/1000;
-			printInfo(g,"Ê±¼ä£º"+period+"Ãë",20,190,280,Color.white);
+			printInfo(g,"æ—¶é—´ï¼š"+period+"ç§’",20,190,280,Color.white);
 			switch (period/10) {
 			case 0:
-				printInfo(g, "²Ë  Äñ", 60,140,250,Color.white);
+				printInfo(g, "èœ  é¸Ÿ", 60,140,250,Color.white);
 				break;
 			case 1:
-				printInfo(g, "Ğ¡  Äñ", 60,140,250,Color.white);
+				printInfo(g, "å° è¾£ é¸¡", 60,140,250,Color.white);
 				break;
 			case 2:
-				printInfo(g, "´ó  Äñ", 60,140,250,Color.white);
+				printInfo(g, "å¤§  é¸Ÿ", 60,140,250,Color.white);
 				break;	
 			case 3:
-				printInfo(g, "ÀÏ  Äñ", 60,140,250,Color.white);
+				printInfo(g, "è€  é¸Ÿ", 60,140,250,Color.white);
 				break;
 			default:
-				printInfo(g, "Äñ  ÈË", 60,140,250,Color.white);
+				printInfo(g, "é¸Ÿ  äºº", 60,140,250,Color.white);
 				break;
 			}
 		}
 
 		int s=(int)(lastTime.getTime()-startTime.getTime())/1000;
-		printInfo(g,"Ê±¼ä£º"+s,15,10,50,Color.yellow);
+		printInfo(g,"æ—¶é—´"+s,15,10,50,Color.yellow);
 		
 		}
 	
 	public void printInfo(Graphics g,String str,int size,int x,int y,Color color){
 		Color c=g.getColor();
-		Font font=new Font("ËÎÌå",Font.BOLD,size);
+		Font font=new Font("å®‹ä½“",Font.BOLD,size);
 		g.setColor(color);
 		g.setFont(font);
 		g.drawString(str, x, y);
 		g.setColor(c);
 	}
-		
-		
-		
-	
-	
-	
-	//ÀûÓÃË«»º³å½â¾öÉÁË¸ÎÊÌâ
+
+
+
+
+
+
+	//åˆ©ç”¨åŒç¼“å†²è§£å†³é—ªçƒé—®é¢˜
 	private Image offScreeImage=null;
 	@Override
 	public void update(Graphics g) {
@@ -107,11 +110,11 @@ public class PlaneGameFrame extends MyFrame {
 	
 	public void launchFrame () {
 		super.launchFrame();
-		
-		//Ôö¼Ó¼üÅÌµÄ¼àÌı
-		addKeyListener(new KeyMonitor());
-		
-		//Éú³É×Óµ¯
+
+		//å¢åŠ é”®ç›˜çš„ç›‘å¬
+		addKeyListener((KeyListener) new KeyMonitor());
+
+		//ç”Ÿæˆå­å¼¹
 		for(int i=0;i<20;i++) {
 			Bullet b=new Bullet();
 			bulletList.add(b);
@@ -119,8 +122,8 @@ public class PlaneGameFrame extends MyFrame {
 		startTime=new Date();
 			
 	}
-	
-	//¶¨ÒåÎªÄÚ²¿Àà¿ÉÒÔ·½±ãÊ¹ÓÃÍâ²¿ÀàµÄÆÕÍ¨ÊôĞÔ
+
+	//å®šä¹‰ä¸ºå†…éƒ¨ç±»å¯ä»¥æ–¹ä¾¿ä½¿ç”¨å¤–éƒ¨ç±»çš„æ™®é€šå±æ€§
 	class KeyMonitor extends KeyAdapter{
 		@Override
 		public void keyPressed(KeyEvent e) {

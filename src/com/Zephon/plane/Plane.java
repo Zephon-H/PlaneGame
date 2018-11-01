@@ -13,7 +13,7 @@ public class Plane extends GameObject{
 	boolean left,up,right,down;
 	
 	private boolean live=true;
-	//¹¹Ôìº¯Êý
+	//æž„é€ å‡½æ•°
 	
 	public boolean isLive() {
 		return live;
